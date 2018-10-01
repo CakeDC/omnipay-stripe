@@ -46,6 +46,27 @@ class CreateSubscriptionRequest extends AbstractRequest
     }
 
     /**
+     * Set the quantity
+     *
+     * @param $value
+     * @return \Omnipay\Common\Message\AbstractRequest|CreateSubscriptionRequest
+     */
+    public function setQuantity($value)
+    {
+        return $this->setParameter('quantity', $value);
+    }
+
+    /**
+     * Get the quantity
+     *
+     * @return string
+     */
+    public function getQuantity()
+    {
+        return $this->getParameter('quantity');
+    }
+
+    /**
      * Set the tax percentage
      *
      * @param $value
@@ -63,6 +84,10 @@ class CreateSubscriptionRequest extends AbstractRequest
         $data = array(
             'plan' => $this->getPlan()
         );
+
+        if ($this->parameters->has('quantity')) {
+            $data['quantity'] = $this->getQuantity();
+        }
 
         if ($this->parameters->has('tax_percent')) {
             $data['tax_percent'] = (float)$this->getParameter('tax_percent');
